@@ -1,0 +1,10 @@
+erfordert die folgende Lib:
+* python-qrencode
+
+unter debian unstable:
+sudo apt-get install python-qrencode
+
+unter altem debian / ubuntu:
+Download von:
+http://packages.debian.org/sid/python-qrencode
+oder im "depend"-Verzeichnis

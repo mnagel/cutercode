@@ -1,0 +1,31 @@
+TODO
+
+* weitere GUI - CGI-Skript, dass als Webservice betrieben werden kann
+* Bild skalieren
+* Probleme mit sehr langen Strings
+* Probleme mit Umlauten - ß
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 17-18: invalid data
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 17-18: invalid data
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 17-18: invalid data
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 15-18: invalid data
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 15-18: invalid data
+Traceback (most recent call last):
+  File "./cutercode", line 49, in update_qrcode
+    text = unicode(self.plaintext.text(), 'utf-8')
+UnicodeDecodeError: 'utf8' codec can't decode bytes in position 15-18: invalid data
+zsh: segmentation fault (core dumped)  ./cutercode
