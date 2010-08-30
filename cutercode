@@ -1,0 +1,67 @@
+#!/usr/bin/python
+# vim:set encoding=utf-8 ft=python ts=8 sw=4 sts=4 et cindent:
+
+# Copyright © 2010  Fabian Knittel <fabian.knittel@avona.com>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
+
+from __future__ import with_statement
+
+import sys
+from PyQt4 import QtGui
+from PyQt4 import QtCore
+from PyQt4 import uic
+import qrencode
+import StringIO
+
+def pil_to_qpixmap(pil_image):
+    buf = StringIO.StringIO()
+    pil_image.save(buf, format='PNG')
+    contents = buf.getvalue()
+    buf.close()
+    qpix = QtGui.QPixmap()
+    qpix.loadFromData(contents)
+    return qpix
+
+class CuterCodeDialog(QtGui.QMainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+
+        uic.loadUi('cutercode.ui', self)
+
+        QtCore.QObject.connect(self.update_btn,
+                QtCore.SIGNAL("clicked()"),
+                self.update_qrcode)
+
+    def update_qrcode(self):
+        text = unicode(self.plaintext.text(), 'utf-8')
+        self.current_plaintext.setText(text)
+        _, _, pil_img = qrencode.encode_scaled(text, level=3, size=200)
+        qpix = pil_to_qpixmap(pil_img)
+        self.qrcode_widget.setPixmap(qpix)
+
+    def show(self):
+        """Show the dialog, but refresh the various models first.
+        """
+        QtGui.QDialog.show(self)
+
+def main():
+    app = QtGui.QApplication(sys.argv)
+    dlg = CuterCodeDialog()
+    dlg.show()
+    return app.exec_()
+
+if __name__ == '__main__':
+    sys.exit(main())
