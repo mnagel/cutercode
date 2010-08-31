@@ -1,10 +1,10 @@
 TODO
 
-* weitere GUI - CGI-Skript, dass als Webservice betrieben werden kann
+* weitere GUI: CGI-Skript, das als Webservice betrieben werden kann
 * Bild bei Fenstergrößen-Änderung skalieren
 * nachträgliches Verkleinern des Fensters ermöglichen
 * Probleme mit sehr langen Strings
 * GUI verhübschen
 	* Fenstertitel
 	* Reaktion auf CTRL-Q, CTRL-W
-	* Start mit einem vorgenerierten QR-Code
+	* Reaktion auf ENTER im Textfeld
