@@ -51,7 +51,12 @@ class CuterCodeDialog(QtGui.QDialog):
 
     def show_qrimg(self, text, size):
         if len(text) == 0:
+            # qrencode wrapper does not like empty strings.
             return
+        if len(text) > 1024:
+            # qrencode wrapper does not like very large strings.
+            text = text[:1024]
+
         self.current_plaintext.setText(text)
         self.plaintext.setText(text)
         self.plaintext.selectAll()
