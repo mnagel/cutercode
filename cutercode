@@ -35,18 +35,31 @@ def pil_to_qpixmap(pil_image):
     qpix.loadFromData(contents)
     return qpix
 
-class CuterCodeDialog(QtGui.QMainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+class CuterCodeDialog(QtGui.QDialog):
+    def __init__(self, default_text=None):
+        QtGui.QDialog.__init__(self, None, QtCore.Qt.Window)
+        self.default_text = default_text
 
         uic.loadUi('cutercode.ui', self)
-
         QtCore.QObject.connect(self.update_btn,
                 QtCore.SIGNAL("clicked()"),
                 self.update_qrcode)
 
+        if self.default_text is None:
+            self.default_text = "Welcome to 'cutercode', a program to " \
+                    "generate and display QR-Codes!"
+
     def show_qrimg(self, text, size):
+        if len(text) == 0:
+            # qrencode wrapper does not like empty strings.
+            return
+        if len(text) > 1024:
+            # qrencode wrapper does not like very large strings.
+            text = text[:1024]
+
         self.current_plaintext.setText(text)
+        self.plaintext.setText(text)
+        self.plaintext.selectAll()
         _, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
         qpix = pil_to_qpixmap(pil_img)
         self.qrcode_widget.setPixmap(qpix)
@@ -54,26 +67,28 @@ class CuterCodeDialog(QtGui.QMainWindow):
     def suggest_size(self):
         w = self.qrcode_widget.size().width()
         h = self.qrcode_widget.size().height()
-        s = min(w,h)
+        s = min(w, h)
         return s
 
     def update_qrcode(self):
-        text = unicode(self.plaintext.text().toUtf8(), "utf-8")
+        text = unicode(self.plaintext.text())
         s = self.suggest_size()
         self.show_qrimg(text, s)
 
     def show(self):
         """Show the dialog, but refresh the various models first.
         """
-        s = " ".join(sys.argv[1:])
-        if s == "":
-           s = "Welcome to 'cutercode', a program to generate and display QR-Codes!"
-        QtGui.QDialog.show(self) # wrong order, but label gets resized here, and we need the new size...
-        self.show_qrimg(s, self.suggest_size());
+        # Wrong order, but label gets resized here, and we need the new size...
+        QtGui.QDialog.show(self)
+        self.show_qrimg(self.default_text, self.suggest_size());
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    dlg = CuterCodeDialog()
+    if len(sys.argv) > 1:
+        text = " ".join(sys.argv[1:])
+    else:
+        text = None
+    dlg = CuterCodeDialog(default_text=text)
     dlg.show()
     return app.exec_()
 

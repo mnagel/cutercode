@@ -2,9 +2,7 @@ TODO
 
 * Bild bei Fenstergrößen-Änderung skalieren
 * nachträgliches Verkleinern des Fensters ermöglichen
-* Probleme mit sehr langen Strings
 * GUI verhübschen
-	* Fenstertitel
 	* Reaktion auf CTRL-Q, CTRL-W
 	* Reaktion auf ENTER im Textfeld
 * Bugs in python-qrencode
