@@ -35,12 +35,10 @@ def pil_to_qpixmap(pil_image):
     qpix.loadFromData(contents)
     return qpix
 
-class CuterCodeDialog(QtGui.QMainWindow):
+class CuterCodeDialog(QtGui.QDialog):
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-
+        QtGui.QDialog.__init__(self, None, QtCore.Qt.Window)
         uic.loadUi('cutercode.ui', self)
-
         QtCore.QObject.connect(self.update_btn,
                 QtCore.SIGNAL("clicked()"),
                 self.update_qrcode)
