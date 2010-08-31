@@ -54,11 +54,11 @@ class CuterCodeDialog(QtGui.QDialog):
     def suggest_size(self):
         w = self.qrcode_widget.size().width()
         h = self.qrcode_widget.size().height()
-        s = min(w,h)
+        s = min(w, h)
         return s
 
     def update_qrcode(self):
-        text = unicode(self.plaintext.text().toUtf8(), "utf-8")
+        text = unicode(self.plaintext.text())
         s = self.suggest_size()
         self.show_qrimg(text, s)
 
