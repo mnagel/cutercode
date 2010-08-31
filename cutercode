@@ -45,6 +45,8 @@ class CuterCodeDialog(QtGui.QDialog):
 
     def show_qrimg(self, text, size):
         self.current_plaintext.setText(text)
+        self.plaintext.setText(text)
+        self.plaintext.selectAll()
         _, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
         qpix = pil_to_qpixmap(pil_img)
         self.qrcode_widget.setPixmap(qpix)
