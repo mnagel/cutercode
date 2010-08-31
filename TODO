@@ -1,7 +1,8 @@
 TODO
 
 * weitere GUI - CGI-Skript, dass als Webservice betrieben werden kann
-* Bild skalieren
+* Bild bei Fenstergrößen-Änderung skalieren
+* nachträgliches Verkleinern des Fensters ermöglichen
 * Probleme mit sehr langen Strings
 * GUI verhübschen
 	* Fenstertitel

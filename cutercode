@@ -48,7 +48,10 @@ class CuterCodeDialog(QtGui.QMainWindow):
     def update_qrcode(self):
         text = unicode(self.plaintext.text().toUtf8(), "utf-8")
         self.current_plaintext.setText(text)
-        _, _, pil_img = qrencode.encode_scaled(text, level=3, size=500)
+        w = self.qrcode_widget.size().width()
+        h = self.qrcode_widget.size().height()
+        s = min(w,h)
+        _, _, pil_img = qrencode.encode_scaled(text, level=3, size=s)
         qpix = pil_to_qpixmap(pil_img)
         self.qrcode_widget.setPixmap(qpix)
 
