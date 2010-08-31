@@ -65,8 +65,11 @@ class CuterCodeDialog(QtGui.QMainWindow):
     def show(self):
         """Show the dialog, but refresh the various models first.
         """
+        s = " ".join(sys.argv[1:])
+        if s == "":
+           s = "Welcome to 'cutercode', a program to generate and display QR-Codes!"
         QtGui.QDialog.show(self) # wrong order, but label gets resized here, and we need the new size...
-        self.show_qrimg("Welcome to 'cutercode', a program to generate and display QR-Codes!", self.suggest_size());
+        self.show_qrimg(s, self.suggest_size());
 
 def main():
     app = QtGui.QApplication(sys.argv)

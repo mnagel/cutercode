@@ -1,3 +1,5 @@
+INSTALLATION
+
 erfordert die folgende Lib:
 * python-qrencode
 
@@ -8,3 +10,17 @@ unter altem debian / ubuntu:
 Download von:
 http://packages.debian.org/sid/python-qrencode
 oder im "depend"-Verzeichnis
+
+
+
+BEDIENUNG
+
+Aufruf im Ordner:
+./cutercode
+
+Dann den gewünschten Text/Link/... im Textfeld eingeben und auf den Knopf klicken.
+
+Kommandozeilen-Parameter werden zur Darstellung des ersten QR-Codes genutzt.
+Beispiel:
+./cutercode So kann ein QR-Code aussehen
+Sorgt dafür, dass der ein QR-Code mit dem Inhalt "So kann ein QR-Code aussehen" erzeugt wird.
