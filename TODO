@@ -1,6 +1,5 @@
 TODO
 
-* weitere GUI: CGI-Skript, das als Webservice betrieben werden kann
 * Bild bei Fenstergrößen-Änderung skalieren
 * nachträgliches Verkleinern des Fensters ermöglichen
 * Probleme mit sehr langen Strings
@@ -8,3 +7,6 @@ TODO
 	* Fenstertitel
 	* Reaktion auf CTRL-Q, CTRL-W
 	* Reaktion auf ENTER im Textfeld
+* Bugs in python-qrencode
+	* dependency auf python-imaging fehlt
+	* String der Länge 0 und String der Länge > 1024 (circa) gehen kaputt
