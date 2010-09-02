@@ -17,25 +17,37 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
 
-from __future__ import with_statement
-
 import sys
 import qrencode
 import StringIO
 
 import cgi
+
 form = cgi.FieldStorage()
-text = form.getfirst('t','DEMO-QR-CODE')
+text = form.getfirst('t',"Welcome to 'cutercode.cgi', a program to generate and display QR-Codes!")
 makepic = form.getfirst('i','0')
+
 if len(text) < 1 or len(text) > 1000:
     #print "Content-type: image/png"
     #print "Location: http://www.debian-administration.org/images/logo.png"
     #print
-    text = "INVALID INPUT (to cutercode)..."
 
+    text = "INVALID INPUT (to cutercode.cgi)..."
 
+if makepic == '1':
+    size = 300
+    _, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
+    buf = StringIO.StringIO()
+    pil_img.save(buf, format='PNG')
+    contents = buf.getvalue()
+    
+    print "Content-type: image/png"
+    print
+    print contents
+    
+    sys.exit()
 
-if makepic != '1':
+else:
     print "Content-type: text/html"
     print
     print """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
@@ -43,12 +55,8 @@ if makepic != '1':
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
 
-        <!--
-    TODO look better
-    -->
-
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title>oneshot - upload</title>
+        <title>cutercode.cgi - a program to generate and display QR-Codes</title>
 
         <style type="text/css">
             body { background-color: #4F7E9E; }
@@ -87,72 +95,43 @@ if makepic != '1':
 
     <body>
 
-        <table border="0">
-            <tr>
-                <td>
-                    <a class="nodeco" href="http://validator.w3.org/check?uri=referer">
+    <table border="0">
+        <tr>
+            <td>
+                <a class="nodeco" href="http://validator.w3.org/check?uri=referer">
+                    <img class="nodeco" src="http://www.w3.org/Icons/valid-xhtml11-blue" alt="Valid XHTML 1.1" height="31" width="88" />
+                </a>
+            </td>
+            <td><h1>cutercode.cgi - a program to generate and display QR-Codes</h1></td>
 
-                        <img class="nodeco" src="http://www.w3.org/Icons/valid-xhtml11-blue" alt="Valid XHTML 1.1" height="31" width="88" />
-                    </a>
-                </td>
-                <td><h1>oneshot - upload - untitled</h1></td>
-
-            </tr>
-        </table>
+        </tr>
+    </table>
         
-            <div>
-        <table border="0">
+    <div>
+    <h2>Your current QR-Code</h2>
+    <table border="0">
     <tr>
       <td rowspan="2">
-          <img class="nodeco" src="./cutercode.cgi?i=1&t=%(qr)s" alt="QR CODE" width="500" height="500"/>
+          <img class="nodeco hanging" src="./cutercode.cgi?i=1&t=%(qr)s" alt="QR CODE" width="500" height="500"/>
       </td>
     </tr>
     <tr>
       <td>
         <h2>%(qr)s</h2>
-        <a class="hanging" href="javascript:show('xx3ky.html')">&rarr; details</a>
-
       </td>
     </tr>
-  </table>
-
-    <ul id="xx3ky.html" style="display:none;">
-    <li style="display:none;">
-                                  </li>
-    <li>uploaded: 2010-09-01 08:16:58                                        </li>
-    <li>expires:  2010-10-01 08:16:58                                          </li>
-
-    <li>size      0.009 MB</li>
-    <li>sha1:     8e8e3acba5faef98e031d3f1cf68168f7fdcd0e6                                  </li>
-    </ul>
-
+    </table>
     </div>
-
-
-        <form name='qrinput' enctype="multipart/form-data"
-              action='./cutercode.cgi' method='get'>
-
-                
-            <input type='text' name='t' value="%(qr)s" size="40" /> &nbsp;
-            <input type='submit' value="Generate QR Code"/>
-        </form>
+    
+    <div>
+    <h2>Generate another QR-Code:</h2>
+    <form name='qrinput' enctype="multipart/form-data" action='./cutercode.cgi' method='get'>
+        <input type='text' name='t' value="%(qr)s" size="40" /> &nbsp;
+        <input type='submit' value="Generate QR Code"/>
+    </form>
+    <div>
 
     </body>
-</html>
-
-    """ % {'qr': text}
+</html>""" % {'qr': text}
     sys.exit()
 
-print "Content-type: image/png"
-print
-
-def pil_to_qpixmap(pil_image):
-    buf = StringIO.StringIO()
-    pil_image.save(buf, format='PNG')
-    contents = buf.getvalue()
-    print contents
-    return ""
-
-size=300
-_, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
-qpix = pil_to_qpixmap(pil_img)
