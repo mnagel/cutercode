@@ -1,10 +1,15 @@
 TODO
 
+* Bugs im Debian-Paket zu python-qrencode
+	* dependency auf python-imaging fehlt
+	* String der Länge 0 und String der Länge > 1024 (circa) gehen kaputt
+
+QT-GUI
 * Bild bei Fenstergrößen-Änderung skalieren
 * nachträgliches Verkleinern des Fensters ermöglichen
 * GUI verhübschen
 	* Reaktion auf CTRL-Q, CTRL-W (ESC funktioniert derzeit)
-* Bugs im Debian-Paket zu python-qrencode
-	* dependency auf python-imaging fehlt
-	* String der Länge 0 und String der Länge > 1024 (circa) gehen kaputt#
-* HTML-Formular um das CGI drumherum
+
+CGI-GUI
+* Input validieren/escapen
+* XHTML-Fehler beheben
