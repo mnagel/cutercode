@@ -17,14 +17,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA.
 
-from __future__ import with_statement
-
 import sys
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from PyQt4 import uic
+import os.path
 import qrencode
 import StringIO
+
+DATA_PATH = os.path.dirname(sys.argv[0])
 
 def pil_to_qpixmap(pil_image):
     buf = StringIO.StringIO()
@@ -40,7 +41,7 @@ class CuterCodeDialog(QtGui.QDialog):
         QtGui.QDialog.__init__(self, None, QtCore.Qt.Window)
         self.default_text = default_text
 
-        uic.loadUi('cutercode.ui', self)
+        uic.loadUi(os.path.join(DATA_PATH, 'cutercode.ui'), self)
         QtCore.QObject.connect(self.update_btn,
                 QtCore.SIGNAL("clicked()"),
                 self.update_qrcode)
