@@ -10,7 +10,6 @@ QT-GUI
 * GUI verhübschen
 	* Reaktion auf CTRL-Q, CTRL-W (ESC funktioniert derzeit)
 * Bei leerer Eingabe Dummybild/Logo anzeigen
-* Knopf und Label entfernen
 
 CGI-GUI
 * Input validieren/escapen

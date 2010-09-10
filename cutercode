@@ -58,7 +58,6 @@ class CuterCodeDialog(QtGui.QDialog):
             # qrencode wrapper does not like very large strings.
             text = text[:1024]
 
-        self.current_plaintext.setText(text)
         self.plaintext.setText(text)
         _, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
         qpix = pil_to_qpixmap(pil_img)
