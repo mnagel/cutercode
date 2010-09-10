@@ -9,7 +9,6 @@ QT-GUI
 * nachträgliches Verkleinern des Fensters ermöglichen
 * GUI verhübschen
 	* Reaktion auf CTRL-Q, CTRL-W (ESC funktioniert derzeit)
-* Bei leerer Eingabe Dummybild/Logo anzeigen
 
 CGI-GUI
 * Input validieren/escapen
