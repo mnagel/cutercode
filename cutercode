@@ -42,8 +42,8 @@ class CuterCodeDialog(QtGui.QDialog):
         self.default_text = default_text
 
         uic.loadUi(os.path.join(DATA_PATH, 'cutercode.ui'), self)
-        QtCore.QObject.connect(self.update_btn,
-                QtCore.SIGNAL("clicked()"),
+        QtCore.QObject.connect(self.plaintext,
+                QtCore.SIGNAL("textChanged(QString)"),
                 self.update_qrcode)
 
         if self.default_text is None:
@@ -60,7 +60,6 @@ class CuterCodeDialog(QtGui.QDialog):
 
         self.current_plaintext.setText(text)
         self.plaintext.setText(text)
-        self.plaintext.selectAll()
         _, _, pil_img = qrencode.encode_scaled(text, level=3, size=size)
         qpix = pil_to_qpixmap(pil_img)
         self.qrcode_widget.setPixmap(qpix)
@@ -82,6 +81,9 @@ class CuterCodeDialog(QtGui.QDialog):
         # Wrong order, but label gets resized here, and we need the new size...
         QtGui.QDialog.show(self)
         self.show_qrimg(self.default_text, self.suggest_size());
+
+        # select inital text
+        self.plaintext.selectAll()
 
 def main():
     app = QtGui.QApplication(sys.argv)
