@@ -10,6 +10,7 @@ QT-GUI
 * nachträgliches Verkleinern des Fensters ermöglichen
 * GUI verhübschen
 	* Reaktion auf CTRL-Q, CTRL-W (ESC funktioniert derzeit)
+* man kann nicht mittendrin tippen, weil jeder Keystroke den Cursor nach hinten versetzt
 
 CGI-GUI
 * Input validieren/escapen
