@@ -42,3 +42,21 @@ debuild -us -uc
 cd ..
 sudo dpkg -i python-qrencode_1.01-1_amd64.deb
 sudo apt-get install python-imaging
+
+TODO
+
+* Bugs im Debian-Paket zu python-qrencode
+	* dependency auf python-imaging fehlt -- http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=598029
+	* String der Länge > 1024 (circa) gehen kaputt -- http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=598031
+	* String der Länge 0 geht kaputt -- kann ich so nicht reproduzieren
+
+QT-GUI
+* Bild bei Fenstergrößen-Änderung skalieren
+* nachträgliches Verkleinern des Fensters ermöglichen
+* GUI verhübschen
+	* Reaktion auf CTRL-Q, CTRL-W (ESC funktioniert derzeit)
+* man kann nicht mittendrin tippen, weil jeder Keystroke den Cursor nach hinten versetzt
+
+CGI-GUI
+* Input validieren/escapen
+* XHTML-Fehler beheben
