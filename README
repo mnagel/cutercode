@@ -1,15 +1,11 @@
 INSTALLATION
 
-erfordert die folgende Lib:
+erfordert die folgende Libs:
 * python-qrencode
+* python-qt4
 
-unter debian unstable:
-sudo apt-get install python-qrencode
-
-unter altem debian / ubuntu:
-Download von:
-http://packages.debian.org/sid/python-qrencode
-oder im "depend"-Verzeichnis
+unter aktuellem Ubuntu/Debian:
+sudo apt-get install python-qrencode python-qt4
 
 
 
@@ -18,27 +14,10 @@ BEDIENUNG
 Aufruf im Ordner:
 ./cutercode
 
-Dann den gewünschten Text/Link/... im Textfeld eingeben und auf den Knopf klicken.
+Dann den gewünschten Text/Link/... im Textfeld eingeben,
+die Anzeige aktualisiert sich automatisch.
 
 Kommandozeilen-Parameter werden zur Darstellung des ersten QR-Codes genutzt.
 Beispiel:
 ./cutercode So kann ein QR-Code aussehen
 Sorgt dafür, dass der ein QR-Code mit dem Inhalt "So kann ein QR-Code aussehen" erzeugt wird.
-
-
-
-SONSTIGES
-
-python-qrencode manuell bauen:
-
-sudo apt-get install devscripts 
-wget http://ftp.de.debian.org/debian/pool/main/p/python-qrencode/python-qrencode_1.01-1.dsc
-wget http://ftp.de.debian.org/debian/pool/main/p/python-qrencode/python-qrencode_1.01.orig.tar.gz
-wget http://ftp.de.debian.org/debian/pool/main/p/python-qrencode/python-qrencode_1.01-1.debian.tar.gz
-dpkg-source -x python-qrencode_1.01-1.dsc
-cd python-qrencode-1.01
-sudo apt-get install debhelper python-all-dev libqrencode-dev
-debuild -us -uc
-cd ..
-sudo dpkg -i python-qrencode_1.01-1_amd64.deb
-sudo apt-get install python-imaging
